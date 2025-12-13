@@ -2,13 +2,17 @@
 
 ## Static and Dynamic route
 
-### Static route
+#### Static route
 - In /app a folder. I this case "store". Inside the typical page.tsx from React.
-### Dynamic route
+#### Dynamic route
 - In /app/store a folder with square brackets. I this case "category". Inside the typical page.tsx from React.  
 - In Next.js 15+ params is a Promise. So we use await of the params. This will help in render with Server Components.
 
-
+## Layout
+#### Global Layout
+- In the root the file layout.tsx is the "global layout of the app". The super "wrapper".
+#### Local Layouts
+- We created other layout.tsx files inside any folder in the /app tree and will affect this folder and their childs.
 
 
 
