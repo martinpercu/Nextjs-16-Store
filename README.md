@@ -20,6 +20,29 @@
 import Link from 'next/link'
 ```
 
+## Dynamic routes and params 
+- To manage long routes like ==> /store/categories/product-A/model-ford/color-grey/etcetc. The folder [categories] change to ==> [...categories]. With the 3 dots whatever continues in the folder will be managed by the page.tsx in the folder.
+- If we want to make "store" looks equal to "categories" we can delete the page.tsx(in store) and change the folder [...categories] to ==> [[...categories]]. We add again square brackets.
+- Also if the path is ==> http://localhost:3000/store/categories/something?referal=hamilton There are params and search params. Now this are also Promise to To handle them:
+```
+interface CategoriesProps {
+    params: Promise<{
+        categories: string[]
+    }>
+    searchParams: Promise<{ 
+        [key: string]: string | string[] | undefined 
+    }>
+}
+
+export default async function Category({
+        params,
+        searchParams
+}: CategoriesProps)
+```
+
+
+
+
 
 
 
