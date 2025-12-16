@@ -1,0 +1,15 @@
+.Hero {
+    margin: 8rem;
+}
+
+.Hero h2 {
+    font-size: 2.5rem;
+    font-style: oblique;
+    background: #34d281;
+}
+.Hero h4 {
+    font-size: 1.8rem;
+    color: aliceblue;
+    text-align: center;
+    background: #3a2599;
+}
