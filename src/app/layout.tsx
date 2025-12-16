@@ -1,9 +1,7 @@
-// "use client"
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Link from 'next/link'
-import { Header } from 'app/components/Header'
+import { Header } from 'app/components/shared/Header'
+import { Footer } from 'app/components/shared/Footer'
 
 
 const geistSans = Geist({
@@ -16,10 +14,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "NEXT Js - Store",
-  description: "This is store description in layout global",
-};
+// export const metadata: Metadata = {
+//   title: "NEXT Js - Store",
+//   description: "This is store description in layout global",
+// };
 
 export default function RootLayout({
   children,
@@ -31,9 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Header></Header>
+        <Header />
 
         {children}
+
+        <Footer />
 
       </body>
     </html>
