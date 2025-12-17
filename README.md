@@ -102,9 +102,27 @@ className={styles.Hero}
 - IMPORTANT the styles are comming as an object.
 
 
-
-
-
+#### Sass
+- Install Sass for dev
+```
+npm install --save-dev sass
+```
+- Following th Next.JS "How to use Sass" https://nextjs.org/docs/app/guides/sass
+- I create a new folder src/sass with main.sass and _variable. To import vars in the main.sass
+```
+@use './variables' as *
+```
+- I create a new folder src/sass. To import the main.sass in root layout
+```
+import '../sass/main.sass'
+```
+- Then to import specific sass in a component. (example Hero) new file "Hero.module.sass". In Hero.tsx ===>
+```
+import styles from './Hero.module.sass'
++
+className={styles.Hero}
+```
+- Important Next.js 16 will use by default Sass. (nothing to do in the next.config. If you use Scss you must set it)
 
 
 

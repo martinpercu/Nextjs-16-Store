@@ -1,14 +1,14 @@
-import styles from './Hero.module.css'
+import styles from './Hero.module.sass'
 
 export const Hero = () => {
     return(
         <section className={styles.Hero}>
-            <h2>
+            <h1>
                  HERO HERO HERO .. . . . . 
-            </h2>
-            <h4>
+            </h1>
+            <h2>
                  bla bla bla power ranger. . . . . 
-            </h4>
+            </h2>
         </section>
     )
 }
