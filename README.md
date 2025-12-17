@@ -1,3 +1,19 @@
+# NextJs
+
+## Static and Dynamic route
+
+### Static route
+- In /app a folder. I this case "store". Inside the typical page.tsx from React.
+### Dynamic route
+- In /app/store a folder with square brackets. I this case "category". Inside the typical page.tsx from React.  
+- In Next.js 15+ params is a Promise. So we use await of the params. This will help in render with Server Components.
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
