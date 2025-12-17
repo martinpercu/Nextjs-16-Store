@@ -102,7 +102,7 @@ className={styles.Hero}
 - IMPORTANT the styles are comming as an object.
 
 
-#### Sass
+#### Sass 
 - Install Sass for dev
 ```
 npm install --save-dev sass
@@ -123,6 +123,7 @@ import styles from './Hero.module.sass'
 className={styles.Hero}
 ```
 - Important Next.js 16 will use by default Sass. (nothing to do in the next.config. If you use Scss you must set it)
+- I have also a globals.sass. This would for globals styles (import in root layout "import '../sass/globals.sass'")
 
 
 
