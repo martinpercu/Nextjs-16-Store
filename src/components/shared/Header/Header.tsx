@@ -1,14 +1,14 @@
 import Link  from "next/link"
+import styles from './Header.module.sass'
 
 export const Header = () => {
     console.log('Hello grom Header')
-
 
     return (
 
         <header>
           <nav>
-            <ul>
+            <ul className={styles.Header__list}>
               <Link href="/">
                 <li>Home</li>              
               </Link>
@@ -18,8 +18,8 @@ export const Header = () => {
               <Link href="/store/categories">
                 <li>Categories</li>              
               </Link>
-              <Link href="/about">
-                <li>About</li>              
+              <Link href="/nowhere">
+                <li>nowhere</li>              
               </Link>
             </ul>
           </nav>
