@@ -1,14 +1,16 @@
 # NextJs
 
-## Static and Dynamic route
 
+## Basics Next.js 16
+
+### Static and Dynamic route
 #### Static route
 - In /app a folder. I this case "store". Inside the typical page.tsx from React.
 #### Dynamic route
 - In /app/store a folder with square brackets. I this case "category". Inside the typical page.tsx from React.  
 - In Next.js 15+ params is a Promise. So we use await of the params. This will help in render with Server Components.
 
-## Layout
+### Layout
 #### Global Layout
 - In the root the file layout.tsx is the "global layout of the app". The super "wrapper".
 #### Local Layouts
@@ -87,6 +89,10 @@ src/
             └── index.ts
 ```
 - The refactor is done.
+
+------
+
+## Styles Manage
 
 #### CSS Modules
 - React use CSS modules. This will be a LOCAL scope css. In standard website HTML the CSS styles are global. Here NO.
@@ -249,10 +255,34 @@ return(
 ```
 
 
+------
 
+## Data Fetching
 
-
-
+#### Shopify + ENV
+- Create an account in shopify and a store there.
+- Create a .env to keep the variables. Add your real variables.  Like this ==>
+```
+SHOPIFY_HOSTNAME="HOST_SHOPIFY"
+SHOPIFY_API_KEY="API_KEY_SHOPIFY"
+CACHE_TOKEN=""
+``` 
+- This vars will never be exposed by Next.js BUT if we want to expose them just add the prefix "NEXT_PUBLIC_". As example ==>
+```
+NEXT_PUBLIC_SHOPIFY_HOSTNAME="HOST_SHOPIFY"
+```
+- Add a list of products in the Shopify platform. You can upload a list of product with a csv example provided by shopify.
+- The shopify API use graphql. Just check the MainProducts.tsx to see how to get all the products. Is an async Promise add something like ==> 
+```
+const response = await fetch(`${process.env.SHOPIFY_HOSTNAME}/admin/api/2025-10/graphql.json`, {
+method: 'POST', // GraphQL always uses POST
+headers: {
+    'Content-Type': 'application/json',
+    'X-Shopify-Access-Token': process.env.SHOPIFY_API_KEY || ""
+},
+body: JSON.stringify(graphqlQuery)
+});
+```
 
 
 
