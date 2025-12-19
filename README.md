@@ -14,6 +14,12 @@
 #### Local Layouts
 - We created other layout.tsx files inside any folder in the /app tree and will affect this folder and their childs.
 
+## Links
+- In layout import the "Links" this allow navigation with no reload. The framework is caching the elements.
+```
+import Link from 'next/link'
+```
+
 
 
 
