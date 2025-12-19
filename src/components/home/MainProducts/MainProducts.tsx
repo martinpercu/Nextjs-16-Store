@@ -1,3 +1,6 @@
+import Image from "next/image";
+import styles from "./MainProducts.module.sass";
+
 // Type definition for Shopify products
 interface ShopifyProduct {
   id: string;
@@ -34,7 +37,7 @@ const getProducts = async (): Promise<ShopifyProduct[]> => {
   const graphqlQuery = {
     query: `
       query {
-        products(first: 10) {
+        products(first: 4) {
           edges {
             node {
               id
@@ -87,8 +90,23 @@ export const MainProducts = async () => {
   const products = await getProducts()
   console.log(products)
   return (
-    <section>
-      <h1>Main Products</h1>
+    <section className={styles.MainProducts}>
+      <h3>✨ New products !!!</h3>
+      <div className={styles.MainProducts__grid}>
+        {products?.map((product) => {
+          const imageSrc = product.images.edges[0]?.node.url;
+          const imageAlt = product.images.edges[0]?.node.altText || product.title;
+
+          return (
+            <article key={product.id}>
+              <p>{product.title}</p>
+              {imageSrc && (
+                <Image src={imageSrc} fill alt={imageAlt} loading="eager" />
+              )}
+            </article>
+          )
+        })}
+      </div>
     </section>
   )
 }
