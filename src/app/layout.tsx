@@ -1,7 +1,9 @@
+// "use client"
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link'
+import { Header } from 'app/components/Header'
 
 
 const geistSans = Geist({
@@ -24,27 +26,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  console.log('Hello from Layout')
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <header>
-          <nav>
-            <ul>
-              <Link href="/">
-                <li>Home</li>              
-              </Link>
-              <Link href="/store">
-                <li>Store</li>              
-              </Link>
-              <Link href="/store/categories">
-                <li>Categories</li>              
-              </Link>
-              <Link href="/about">
-                <li>About</li>              
-              </Link>
-            </ul>
-          </nav>
-        </header>
+        <Header></Header>
 
         {children}
 

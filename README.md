@@ -41,6 +41,16 @@ export default async function Category({
 ```
 
 
+## React-Server-Components
+- page.tsx If ==> The console.log('Hello Planet') will be show in the console. 
+- If add ==> 
+```
+"use client"
+```
+- page.tsx If ==> The console.log('Hello Planet') will be show in the browser devTools
+- This status works nested. If any compoment is nested inside a client-component this child component is client-component.
+- As example see new component Header. As layout child will be a server component.
+
 
 
 
