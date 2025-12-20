@@ -15,12 +15,9 @@ export const Header = () => {
               <Link href="/store">
                 <li>Store</li>              
               </Link>
-              <Link href="/store/categories">
-                <li>Categories</li>              
-              </Link>
-              <Link href="/nowhere">
+              {/* <Link href="/nowhere">
                 <li>nowhere</li>              
-              </Link>
+              </Link> */}
             </ul>
           </nav>
         </header>

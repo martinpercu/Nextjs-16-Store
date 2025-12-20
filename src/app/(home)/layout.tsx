@@ -4,15 +4,14 @@ import { Description } from "app/components/home/Description"
 
 
 
-export default function HomeLayout({
-  children,
-}: {
+export default function HomeLayout({ children }: {
   children: React.ReactNode
 }) {
   return (
     <div>
         <Hero />
         <Description />
+        {children}
     </div>
   );
 }
