@@ -81,6 +81,8 @@ const getProducts = async (): Promise<ShopifyProduct[]> => {
     return [];
   }
 
+  // throw new Error('Dummy Error')
+
   // Clean up Shopify's structure to make it easier to use
   return data.products.edges.map((edge) => edge.node);
 }
