@@ -353,7 +353,42 @@ console.log(error)
 
 
 
+## Next.js - Advanced 
 
+### Important concepts RSC & "Template vs Layout"
+
+#### React Server Component
+
+- **Core Mechanism**: Next.js uses Progressive Hydration. Renders React Server Components (RSC) to HTML on the server, sends chunks for parallel client processing and faster initial paint.
+
+- **Key Features**
+  - Server First: HTML arrives before JS → content visible immediately.
+  - Client Second: Interactive components hydrate after static UI.
+  - Parallel Loading: Chunking avoids sequential script bottlenecks.
+
+- **Performance Gains**
+  - Instant HTML: High perceived speed via RSC delivery.
+  - Smart Priority: Server content hydrates before client interactivity.
+  - No Blocking: Parallel JS execution reduces wait times.
+
+- **Best Practices**
+  - Server by Default: Use RSCs for data fetching and layout.
+  - Minimize Client Use: Add 'use client' only for state or Browser APIs (e.g., localStorage).
+  - Optimize Tree: Keep Client Components at the leaves of the component tree.
+
+
+#### Layout vs. Template
+
+- **Key Difference**: Layouts persist and maintain state across route changes (no re-mounting), while Templates create a new instance (re-mount) on every navigation.
+
+- **Layouts (Persistent)**
+  - Behavior: Do not re-render or re-mount when navigating between sibling routes.
+  - Pros: High efficiency, state preservation, better performance (ideal for headers/sidebars).
+
+- **Templates (Dynamic)**
+  - Behavior: Re-mount completely on every route change. Every child component is recreated.
+  - Pros: Useful for features requiring fresh start, like entrance animations (CSS/Framer Motion) or useEffect for analytics/page views.
+  - Cons: Higher resource cost due to constant re-mounting.
 
 
 
