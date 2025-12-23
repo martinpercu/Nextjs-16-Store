@@ -391,6 +391,38 @@ console.log(error)
   - Cons: Higher resource cost due to constant re-mounting.
 
 
+#### Architecture
+- This will be the refactor to use a solid architecture to work.
+- A folder src/config with a files env.ts ==> This will get all env variables.
+```
+export const env = {
+  SHOPIFY_API_KEY: process.env.SHOPIFY_API_KEY || "",
+  SHOPIFY_HOSTNAME: process.env.SHOPIFY_HOSTNAME || "",
+}
+```
+- A folder src/services  ==> All services we could use (now only bring the products from shopify)
+- Another folder inside services to organice by domain. Now only shopify. But in the future could be anything else like firebase authentication or calendy or whatever.
+- I this src/services/shopify folder this new structure.
+```
+src/services/shopify/
+├── index.ts          # Funciones principales + re-export de tipos
+├── urls.ts           # URLs centralizadas
+└── types/
+    ├── index.ts      # Barrel export de todos los tipos
+    └── product.ts    # ShopifyProduct & ShopifyResponse
+```
+- Now url.ts has all the path thats works for shopify. Now only products + all.
+- The index.ts is the funciton to bring all the products (bring from MainProducts). 
+- MainProducts.tsx is much clean only import ==>
+```  
+import { getProducts } from "app/services/shopify";
++
+export const MainProducts = async () => {
+  const products = await getProducts()
+}
+```
+- This structure will allow to scale the proyect.
+
 
 
 
