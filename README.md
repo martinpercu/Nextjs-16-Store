@@ -52,6 +52,41 @@ export default async function Category({
 - As example see new component Header. As layout child will be a server component.
 
 
+## Architecture
+- Te basic architecture for this will be ==>
+```
+src/
+├── app/
+│   ├── favicon.ico
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── store/
+│       ├── layout.tsx
+│       ├── DELETED-page.tsx
+│       └── [[...categories]]/
+│           └── page.tsx
+│
+└── components/
+    ├── home/
+    │   ├── Description/
+    │   │   ├── Description.tsx
+    │   │   └── index.ts
+    │   ├── Hero/
+    │   │   ├── Hero.tsx
+    │   │   └── index.ts
+    │   └── MainProducts/
+    │       ├── MainProducts.tsx
+    │       └── index.ts
+    │
+    └── shared/
+        ├── Footer/
+        │   ├── Footer.tsx
+        │   └── index.ts
+        └── Header/
+            ├── Header.tsx
+            └── index.ts
+```
+- The refactor is done.
 
 
 
