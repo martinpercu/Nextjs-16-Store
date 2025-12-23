@@ -14,13 +14,13 @@
 #### Local Layouts
 - We created other layout.tsx files inside any folder in the /app tree and will affect this folder and their childs.
 
-## Links
+#### Links
 - In layout import the "Links" this allow navigation with no reload. The framework is caching the elements.
 ```
 import Link from 'next/link'
 ```
 
-## Dynamic routes and params 
+#### Dynamic routes and params 
 - To manage long routes like ==> /store/categories/product-A/model-ford/color-grey/etcetc. The folder [categories] change to ==> [...categories]. With the 3 dots whatever continues in the folder will be managed by the page.tsx in the folder.
 - If we want to make "store" looks equal to "categories" we can delete the page.tsx(in store) and change the folder [...categories] to ==> [[...categories]]. We add again square brackets.
 - Also if the path is ==> http://localhost:3000/store/categories/something?referal=hamilton There are params and search params. Now this are also Promise to To handle them:
@@ -41,7 +41,7 @@ export default async function Category({
 ```
 
 
-## React-Server-Components
+#### React-Server-Components
 - page.tsx If ==> The console.log('Hello Planet') will be show in the console. 
 - If add ==> 
 ```
@@ -52,7 +52,7 @@ export default async function Category({
 - As example see new component Header. As layout child will be a server component.
 
 
-## Architecture
+#### Architecture
 - Te basic architecture for this will be ==>
 ```
 src/
@@ -87,6 +87,23 @@ src/
             └── index.ts
 ```
 - The refactor is done.
+
+#### CSS Modules
+- React use CSS modules. This will be a LOCAL scope css. In standard website HTML the CSS styles are global. Here NO.
+- Just as example Hero ===> New file Hero.modules.css. Here add any css
+- In Hero.tsx import the styles
+```
+import styles from './Hero.module.css'
+```
+- Then just add add it like this===>
+```
+className={styles.Hero}
+```
+- IMPORTANT the styles are comming as an object.
+
+
+
+
 
 
 
