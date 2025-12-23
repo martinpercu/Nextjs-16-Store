@@ -14,13 +14,13 @@
 #### Local Layouts
 - We created other layout.tsx files inside any folder in the /app tree and will affect this folder and their childs.
 
-## Links
+#### Links
 - In layout import the "Links" this allow navigation with no reload. The framework is caching the elements.
 ```
 import Link from 'next/link'
 ```
 
-## Dynamic routes and params 
+#### Dynamic routes and params 
 - To manage long routes like ==> /store/categories/product-A/model-ford/color-grey/etcetc. The folder [categories] change to ==> [...categories]. With the 3 dots whatever continues in the folder will be managed by the page.tsx in the folder.
 - If we want to make "store" looks equal to "categories" we can delete the page.tsx(in store) and change the folder [...categories] to ==> [[...categories]]. We add again square brackets.
 - Also if the path is ==> http://localhost:3000/store/categories/something?referal=hamilton There are params and search params. Now this are also Promise to To handle them:
@@ -41,7 +41,7 @@ export default async function Category({
 ```
 
 
-## React-Server-Components
+#### React-Server-Components
 - page.tsx If ==> The console.log('Hello Planet') will be show in the console. 
 - If add ==> 
 ```
@@ -50,6 +50,118 @@ export default async function Category({
 - page.tsx If ==> The console.log('Hello Planet') will be show in the browser devTools
 - This status works nested. If any compoment is nested inside a client-component this child component is client-component.
 - As example see new component Header. As layout child will be a server component.
+
+
+#### Architecture
+- Te basic architecture for this will be ==>
+```
+src/
+├── app/
+│   ├── favicon.ico
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── store/
+│       ├── layout.tsx
+│       ├── DELETED-page.tsx
+│       └── [[...categories]]/
+│           └── page.tsx
+│
+└── components/
+    ├── home/
+    │   ├── Description/
+    │   │   ├── Description.tsx
+    │   │   └── index.ts
+    │   ├── Hero/
+    │   │   ├── Hero.tsx
+    │   │   └── index.ts
+    │   └── MainProducts/
+    │       ├── MainProducts.tsx
+    │       └── index.ts
+    │
+    └── shared/
+        ├── Footer/
+        │   ├── Footer.tsx
+        │   └── index.ts
+        └── Header/
+            ├── Header.tsx
+            └── index.ts
+```
+- The refactor is done.
+
+#### CSS Modules
+- React use CSS modules. This will be a LOCAL scope css. In standard website HTML the CSS styles are global. Here NO.
+- Just as example Hero ===> New file Hero.modules.css. Here add any css
+- In Hero.tsx import the styles
+```
+import styles from './Hero.module.css'
+```
+- Then just add add it like this===>
+```
+className={styles.Hero}
+```
+- IMPORTANT the styles are comming as an object.
+
+
+#### Sass 
+- Install Sass for dev
+```
+npm install --save-dev sass
+```
+- Following th Next.JS "How to use Sass" https://nextjs.org/docs/app/guides/sass
+- I create a new folder src/sass with main.sass and _variable. To import vars in the main.sass
+```
+@use './variables' as *
+```
+- I create a new folder src/sass. To import the main.sass in root layout
+```
+import '../sass/main.sass'
+```
+- Then to import specific sass in a component. (example Hero) new file "Hero.module.sass". In Hero.tsx ===>
+```
+import styles from './Hero.module.sass'
++
+className={styles.Hero}
+```
+- Important Next.js 16 will use by default Sass. (nothing to do in the next.config. If you use Scss you must set it)
+- I have also a globals.sass. This would for globals styles (import in root layout "import '../sass/globals.sass'")
+
+
+#### Static Files
+- To use the statics files is in the public folder. 
+- For images a folder "images".
+- To import the images ==>
+```
+<img src="/images/back-1.png" alt="example" />
+```
+- Everything in the public folder will be expose in the app. Easy to bring whatever static we have there.
+
+
+#### Image optimization
+- In Description.tsx import Image ==>
+```
+import Image from 'next/image';
+```
+- <img> ==> <Image>
+- Image will render the image optimizing (use lazy loadings render images resizing etc). In component we use Image and set the height width and turn prioority in false. (This will cancel the lazy loadings). Also we can set the quality (by default is 75).
+````
+<Image 
+    src="/images/back-1.png"    
+    alt="example" 
+    width={480}
+    height={280}
+    priority={false} // this is to cancel Lazy Loading ==> this is in the main page!!!
+    quality={50}
+/>
+```
+
+
+
+
+
+
+
+
+
 
 
 
