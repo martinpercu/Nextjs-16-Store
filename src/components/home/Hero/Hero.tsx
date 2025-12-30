@@ -4,10 +4,10 @@ export const Hero = () => {
     return(
         <section className={styles.Hero}>
             <h1>
-                 HERO HERO HERO .. . . . . 
+                 PC Richard Gear 
             </h1>
             <h2>
-                 bla bla bla power ranger. . . . . 
+                 Everything for modern life 
             </h2>
         </section>
     )

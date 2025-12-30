@@ -1,14 +1,16 @@
 # NextJs
 
-## Static and Dynamic route
 
+## Basics Next.js 16
+
+### Static and Dynamic route
 #### Static route
 - In /app a folder. I this case "store". Inside the typical page.tsx from React.
 #### Dynamic route
 - In /app/store a folder with square brackets. I this case "category". Inside the typical page.tsx from React.  
 - In Next.js 15+ params is a Promise. So we use await of the params. This will help in render with Server Components.
 
-## Layout
+### Layout
 #### Global Layout
 - In the root the file layout.tsx is the "global layout of the app". The super "wrapper".
 #### Local Layouts
@@ -87,6 +89,10 @@ src/
             └── index.ts
 ```
 - The refactor is done.
+
+------
+
+## Styles Manage
 
 #### CSS Modules
 - React use CSS modules. This will be a LOCAL scope css. In standard website HTML the CSS styles are global. Here NO.
@@ -179,6 +185,7 @@ import Image from 'next/image';
     />
 </div>
 ```
+- To convert pimage in blur in base 64 ==> https://blurred.dev/
 
 #### Font Set
 - NextJs has almost all the google fonts. So we will set Roboto with some weights
@@ -195,6 +202,144 @@ const roboto = Roboto({
 ```
 <body className={roboto.className}>
 ```
+
+
+#### Dynamic styles
+- To use dynamic syles the components should be a "client component" (in the example Description.tsx)==>
+```
+"use client"
+```
+- Import classnames
+```
+npm i classnames
+```
+- In the component we create an "state" -> useState and also import classNames with BIND. This is important to only use the style only in this component from the Description Sass ==> 
+```
+import classNames from 'classnames/bind';
+import { useState } from 'react';
+```
+- In the return a state for addind border.
+- In the return a handleclick funtion with the negacion of previous state.
+- In the return a context=classNames with binds
+- In the return the const buttonStyles that will be change with the click and apply the style 
+- In the return the element with onClick={handleClick} className={buttonStyles} to activate the style on/off
+```
+const [hasBorder, setBorder] = useState(false);
+const handleClick = () => setBorder(!hasBorder);
+const cx = classNames.bind(styles);
+const buttonStyles = cx('Description__button', {
+'Description__button--border': hasBorder,
+});
+
+return(
+    <section>
+        <button onClick={handleClick} className={buttonStyles}>
+            <div>
+                <Image
+                    src="/images/back-1.png"
+                />
+            </div>
+        </button>
+    </section>
+)
+```
+- Check the Description.module.sass something like this ==>
+```
+.Description
+  border-radius: 1.375rem
+  &__button
+    cursor: pointer
+    &--border
+      img
+        border: 3px solid $main-contrast
+```
+
+
+------
+
+## Data Fetching
+
+#### Shopify + ENV
+- Create an account in shopify and a store there.
+- Create a .env to keep the variables. Add your real variables.  Like this ==>
+```
+SHOPIFY_HOSTNAME="HOST_SHOPIFY"
+SHOPIFY_API_KEY="API_KEY_SHOPIFY"
+CACHE_TOKEN=""
+``` 
+- This vars will never be exposed by Next.js BUT if we want to expose them just add the prefix "NEXT_PUBLIC_". As example ==>
+```
+NEXT_PUBLIC_SHOPIFY_HOSTNAME="HOST_SHOPIFY"
+```
+- Add a list of products in the Shopify platform. You can upload a list of product with a csv example provided by shopify.
+- The shopify API use graphql. Just check the MainProducts.tsx to see how to get all the products. Is an async Promise add something like ==> 
+```
+const response = await fetch(`${process.env.SHOPIFY_HOSTNAME}/admin/api/2025-10/graphql.json`, {
+method: 'POST', // GraphQL always uses POST
+headers: {
+    'Content-Type': 'application/json',
+    'X-Shopify-Access-Token': process.env.SHOPIFY_API_KEY || ""
+},
+body: JSON.stringify(graphqlQuery)
+});
+```
+
+#### Loader for Products
+- To show the products add some styles ==> MainProducts.modules.sass
+- In MainProducts.tsx import Image and the styles ==>
+```
+import Image from "next/image";
+import styles from "./MainProducts.module.sass";
+```
+- Next will show this error ==>
+```
+⨯ Error: Invalid src prop (https://cdn.shopify.com/s/files/1/0799/1027/3268/files/pRPPiS4.jpg?v=1766099883) on `next/image`, hostname "cdn.shopify.com" is not configured under images in your `next.config.js`
+```
+- This is because Next.js for security reason needs be config to receive images. So next.config.ts add ==>
+```
+const nextConfig: NextConfig = {
+    images: {
+        remotePatterns: [
+        {
+            hostname: 'cdn.shopify.com',
+            protocol: 'https',
+        }
+        ]
+    }
+}
+```
+- We don't know how much time we need to get all the products so a loader to show during the load could be a nice UX. 
+- New file /src/store/loading.tsx importing a Loader from the component/shared folder.
+- If we have the loading will affect all the page ALL. We need to refactor a little bit to separate making all static file not related to the loading. OR use "suspense" to manage it. 
+
+
+#### Route Grouping
+- Route grouping is a seamless way to organize your Next.js project. Next.js allows us to create folders within the app directory that are not recognized as paths in the project. For this purpose, there exists a convention that you must follow if you intend to organize your files this way. To create folders that are not mapped as routes, you must enclose the folder’s name within brackets
+```
+📂/app/(home)/branding-campaign/page.tsx
+```
+- New folder /app/(home) there move the page.tsx and create new Layout with Hero and Description components.
+- Delete Hero and Description component from the app/layout.tsx
+- Move "loading" to this new folder (home). Now the loading is encapsulated here.
+- Add some styles to Header.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
