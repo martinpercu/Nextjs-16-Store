@@ -180,6 +180,23 @@ import Image from 'next/image';
 </div>
 ```
 
+#### Font Set
+- NextJs has almost all the google fonts. So we will set Roboto with some weights
+- In the app/layout.tsx ==>
+```
+import { Roboto } from "next/font/google";
++
+const roboto = Roboto({
+  weight: ["100", "300","500", "700"],
+  subsets: ["latin"],
+});
+```
+- Then we add in the body ==> 
+```
+<body className={roboto.className}>
+```
+
+
 
 
 
