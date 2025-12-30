@@ -143,7 +143,7 @@ import Image from 'next/image';
 ```
 - <img> ==> <Image>
 - Image will render the image optimizing (use lazy loadings render images resizing etc). In component we use Image and set the height width and turn prioority in false. (This will cancel the lazy loadings). Also we can set the quality (by default is 75).
-````
+```
 <Image 
     src="/images/back-1.png"    
     alt="example" 
@@ -154,7 +154,31 @@ import Image from 'next/image';
 />
 ```
 
+#### Image Responsive
 
+- The image will be in an "image container". Then we add "fill" to the Image and then the Sass imageContainer.
+- Also we add placeholder blur ==> This is to show a blurried image when loading. We create outside a blur image realin Base64 to preload faster. Just add a const PLACEHOLDER_BACK_IMAGE = data:image/jpeg;base64,/9j/4AA....... and use in component.
+```
+ &__imageContainer
+    position: relative
+    width: 480px
+    height: 280px
+    & > img
+      object-fit: cover
+      border-radius: 1rem
+      box-shadow: 0 0 4rem rgba(255, 255, 255, 0.2)
+```
+```
+<div className={styles.Description__imageContainer}>
+    <Image 
+        src="/images/back-1.png"    
+        alt="example" 
+        fill
+        placeholder='blur'
+        blurDataURL='PLACEHOLDER_BACK_IMAGE'
+    />
+</div>
+```
 
 
 
