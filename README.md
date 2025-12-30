@@ -126,6 +126,47 @@ className={styles.Hero}
 - I have also a globals.sass. This would for globals styles (import in root layout "import '../sass/globals.sass'")
 
 
+#### Static Files
+- To use the statics files is in the public folder. 
+- For images a folder "images".
+- To import the images ==>
+```
+<img src="/images/back-1.png" alt="example" />
+```
+- Everything in the public folder will be expose in the app. Easy to bring whatever static we have there.
+
+
+#### Image optimization
+- In Description.tsx import Image ==>
+```
+import Image from 'next/image';
+```
+- <img> ==> <Image>
+- Image will render the image optimizing (use lazy loadings render images resizing etc). In component we use Image and set the height width and turn prioority in false. (This will cancel the lazy loadings). Also we can set the quality (by default is 75).
+````
+<Image 
+    src="/images/back-1.png"    
+    alt="example" 
+    width={480}
+    height={280}
+    priority={false} // this is to cancel Lazy Loading ==> this is in the main page!!!
+    quality={50}
+/>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
