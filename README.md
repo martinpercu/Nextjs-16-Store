@@ -284,6 +284,41 @@ body: JSON.stringify(graphqlQuery)
 });
 ```
 
+#### Loader for Products
+- To show the products add some styles ==> MainProducts.modules.sass
+- In MainProducts.tsx import Image and the styles ==>
+```
+import Image from "next/image";
+import styles from "./MainProducts.module.sass";
+```
+- Next will show this error ==>
+```
+⨯ Error: Invalid src prop (https://cdn.shopify.com/s/files/1/0799/1027/3268/files/pRPPiS4.jpg?v=1766099883) on `next/image`, hostname "cdn.shopify.com" is not configured under images in your `next.config.js`
+```
+- This is because Next.js for security reason needs be config to receive images. So next.config.ts add ==>
+```
+const nextConfig: NextConfig = {
+    images: {
+        remotePatterns: [
+        {
+            hostname: 'cdn.shopify.com',
+            protocol: 'https',
+        }
+        ]
+    }
+}
+```
+- We don't know how much time we need to get all the products so a loader to show during the load could be a nice UX. 
+- New file /src/store/loading.tsx importing a Loader from the component/shared folder.
+- If we have the loading will affect all the page ALL. We need to refactor a little bit to separate making all static file not related to the loading. OR use "suspense" to manage it. 
+
+
+
+
+
+
+
+
 
 
 

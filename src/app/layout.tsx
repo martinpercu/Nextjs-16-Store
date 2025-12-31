@@ -2,6 +2,8 @@
 import { Roboto } from "next/font/google";
 import { Header } from 'app/components/shared/Header'
 import { Footer } from 'app/components/shared/Footer'
+import { Hero } from "app/components/home/Hero"
+import { Description } from "app/components/home/Description"
 import '../sass/main.sass'
 import '../sass/globals.sass'
 
@@ -14,15 +16,15 @@ const roboto = Roboto({
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-
-  console.log('Hello from Layout')
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
       <body className={roboto.className}>
         <Header />
+        <Hero />
+        <Description />
 
         {children}
 
