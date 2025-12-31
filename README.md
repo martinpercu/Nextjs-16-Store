@@ -179,6 +179,7 @@ import Image from 'next/image';
     />
 </div>
 ```
+- To convert pimage in blur in base 64 ==> https://blurred.dev/
 
 #### Font Set
 - NextJs has almost all the google fonts. So we will set Roboto with some weights
@@ -195,6 +196,75 @@ const roboto = Roboto({
 ```
 <body className={roboto.className}>
 ```
+
+
+#### Dynamic styles
+- To use dynamic syles the components should be a "client component" (in the example Description.tsx)==>
+```
+"use client"
+```
+- Import classnames
+```
+npm i classnames
+```
+- In the component we create an "state" -> useState and also import classNames with BIND. This is important to only use the style only in this component from the Description Sass ==> 
+```
+import classNames from 'classnames/bind';
+import { useState } from 'react';
+```
+- In the return a state for addind border.
+- In the return a handleclick funtion with the negacion of previous state.
+- In the return a context=classNames with binds
+- In the return the const buttonStyles that will be change with the click and apply the style 
+- In the return the element with onClick={handleClick} className={buttonStyles} to activate the style on/off
+```
+const [hasBorder, setBorder] = useState(false);
+const handleClick = () => setBorder(!hasBorder);
+const cx = classNames.bind(styles);
+const buttonStyles = cx('Description__button', {
+'Description__button--border': hasBorder,
+});
+
+return(
+    <section>
+        <button onClick={handleClick} className={buttonStyles}>
+            <div>
+                <Image
+                    src="/images/back-1.png"
+                />
+            </div>
+        </button>
+    </section>
+)
+```
+- Check the Description.module.sass something like this ==>
+```
+.Description
+  border-radius: 1.375rem
+  &__button
+    cursor: pointer
+    &--border
+      img
+        border: 3px solid $main-contrast
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
