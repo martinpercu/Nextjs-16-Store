@@ -313,6 +313,16 @@ const nextConfig: NextConfig = {
 - If we have the loading will affect all the page ALL. We need to refactor a little bit to separate making all static file not related to the loading. OR use "suspense" to manage it. 
 
 
+#### Route Grouping
+- Route grouping is a seamless way to organize your Next.js project. Next.js allows us to create folders within the app directory that are not recognized as paths in the project. For this purpose, there exists a convention that you must follow if you intend to organize your files this way. To create folders that are not mapped as routes, you must enclose the folder’s name within brackets
+```
+📂/app/(home)/branding-campaign/page.tsx
+```
+- New folder /app/(home) there move the page.tsx and create new Layout with Hero and Description components.
+- Delete Hero and Description component from the app/layout.tsx
+- Move "loading" to this new folder (home). Now the loading is encapsulated here.
+- Add some styles to Header.
+
 
 
 
