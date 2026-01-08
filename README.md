@@ -324,22 +324,104 @@ const nextConfig: NextConfig = {
 - Add some styles to Header.
 
 
+#### Error
+- Next.js implements the "React error boundary" with the file error.tsx
+- To see how works new error.tsx file in /(home). 
+- Important error.tsx should be a client component.
+- As some error could happend when loading data or some async stuff we can add a button to "TRY AGAIN"
+- To try this just add any error in MainProducts component ==>
+```
+  // throw new Error('Dummy Error')
+```
+- In error.tsx we can add useEffect to send data to an observability service like datadog Dynatrace etc etc
+```
+useEffect(() => {
+console.log(error) 
+}, []) 
+```
+
+#### Global Error and 404
+- In /app new error.tsx file. Important!! shoud be a client component.
+- Here we will try to reset using GloablError({ reset }: ErrorPageProps)
+- To add interface ErrorPageProps new file in root types.d.ts
+- To test just add somewhere (I have in categories) ==>
+```
+ throw new Error('Error: POWER BOMB!!')
+```
+- When go to store will launch this error component.
+- The 404 not found is quite simple. Just in /app/not-found.tsx with function NotFound(). for better UX is good idea in this component add some links to "safes" links.
 
 
 
+## Next.js - Advanced 
+
+### Important concepts RSC & "Template vs Layout"
+
+#### React Server Component
+
+- **Core Mechanism**: Next.js uses Progressive Hydration. Renders React Server Components (RSC) to HTML on the server, sends chunks for parallel client processing and faster initial paint.
+
+- **Key Features**
+  - Server First: HTML arrives before JS → content visible immediately.
+  - Client Second: Interactive components hydrate after static UI.
+  - Parallel Loading: Chunking avoids sequential script bottlenecks.
+
+- **Performance Gains**
+  - Instant HTML: High perceived speed via RSC delivery.
+  - Smart Priority: Server content hydrates before client interactivity.
+  - No Blocking: Parallel JS execution reduces wait times.
+
+- **Best Practices**
+  - Server by Default: Use RSCs for data fetching and layout.
+  - Minimize Client Use: Add 'use client' only for state or Browser APIs (e.g., localStorage).
+  - Optimize Tree: Keep Client Components at the leaves of the component tree.
 
 
+#### Layout vs. Template
+
+- **Key Difference**: Layouts persist and maintain state across route changes (no re-mounting), while Templates create a new instance (re-mount) on every navigation.
+
+- **Layouts (Persistent)**
+  - Behavior: Do not re-render or re-mount when navigating between sibling routes.
+  - Pros: High efficiency, state preservation, better performance (ideal for headers/sidebars).
+
+- **Templates (Dynamic)**
+  - Behavior: Re-mount completely on every route change. Every child component is recreated.
+  - Pros: Useful for features requiring fresh start, like entrance animations (CSS/Framer Motion) or useEffect for analytics/page views.
+  - Cons: Higher resource cost due to constant re-mounting.
 
 
-
-
-
-
-
-
-
-
-
+#### Architecture
+- This will be the refactor to use a solid architecture to work.
+- A folder src/config with a files env.ts ==> This will get all env variables.
+```
+export const env = {
+  SHOPIFY_API_KEY: process.env.SHOPIFY_API_KEY || "",
+  SHOPIFY_HOSTNAME: process.env.SHOPIFY_HOSTNAME || "",
+}
+```
+- A folder src/services  ==> All services we could use (now only bring the products from shopify)
+- Another folder inside services to organice by domain. Now only shopify. But in the future could be anything else like firebase authentication or calendy or whatever.
+- I this src/services/shopify folder this new structure.
+```
+src/services/shopify/
+├── index.ts          # Funciones principales + re-export de tipos
+├── urls.ts           # URLs centralizadas
+└── types/
+    ├── index.ts      # Barrel export de todos los tipos
+    └── product.ts    # ShopifyProduct & ShopifyResponse
+```
+- Now url.ts has all the path thats works for shopify. Now only products + all.
+- The index.ts is the funciton to bring all the products (bring from MainProducts). 
+- MainProducts.tsx is much clean only import ==>
+```  
+import { getProducts } from "app/services/shopify";
++
+export const MainProducts = async () => {
+  const products = await getProducts()
+}
+```
+- This structure will allow to scale the proyect.
 
 
 
