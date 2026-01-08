@@ -324,10 +324,21 @@ const nextConfig: NextConfig = {
 - Add some styles to Header.
 
 
-
-
-
-
+#### Error
+- Next.js implements the "React error boundary" with the file error.tsx
+- To see how works new error.tsx file in /(home). 
+- Important error.tsx should be a client component.
+- As some error could happend when loading data or some async stuff we can add a button to "TRY AGAIN"
+- To try this just add any error in MainProducts component ==>
+```
+  // throw new Error('Dummy Error')
+```
+- In error.tsx we can add useEffect to send data to an observability service like datadog Dynatrace etc etc
+```
+useEffect(() => {
+console.log(error) 
+}, []) 
+```
 
 
 
