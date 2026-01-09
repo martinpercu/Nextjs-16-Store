@@ -5,7 +5,7 @@ import { ShopifyProduct, ShopifyResponse } from "./types"
 export * from "./types"
 
 export const getProducts = async (): Promise<ShopifyProduct[]> => {
-  // GraphQL query to fetch the first 10 products
+  // GraphQL query to fetch the first 4 products
   const graphqlQuery = {
     query: `
       query {

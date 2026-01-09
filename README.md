@@ -424,6 +424,34 @@ export const MainProducts = async () => {
 - This structure will allow to scale the proyect.
 
 
+#### API Road Handler
+- Just new folder app/api and a new file ==> route.ts (this is the name used for Next.js "route.ts"). Likey main.py for fastAPI. 
+- The route.ts file something like this to get the products. Is just and async funtion + the HTTP Verb (GET PUT etc etc). 
+``` 
+import { getProducts } from "app/services/shopify"
+
+getProducts() 
+
+export async function GET() {
+    const products = await getProducts()
+    return Response.json({products})
+}
+```
+- Now for use this "allProducts" from this in the MainProducts.tsx. We change from use direct the service to use the API. This es what we know as "Proxy server" the data of petition is "hidden"  ==> 
+```
+export const MainProducts = async () => {
+  const response = await fetch('http://localhost:3000/api')
+  const {products} = await response.json();
+
+  return (
+    <section>
+      // doing something with products     
+    </section>
+  )
+}
+```
+- This is usefull to be use with a **client component** otherwise as all component are server components in next.js this info will never be exposed.
+
 
 
 
