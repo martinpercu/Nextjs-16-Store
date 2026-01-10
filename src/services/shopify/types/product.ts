@@ -13,6 +13,7 @@ export interface ShopifyProduct {
       }
     }>
   }
+  image?: string | null; // <-- Añade esta línea
 }
 
 // Type definition for Shopify GraphQL response

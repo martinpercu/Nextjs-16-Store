@@ -453,9 +453,25 @@ export const MainProducts = async () => {
 - This is usefull to be use with a **client component** otherwise as all component are server components in next.js this info will never be exposed.
 
 
+#### Show Products from Shopify
+- First in shopify panel create the colletions. (that will helps for categories)
+- New folder in components/Store
+- New components in ==>  components/Store/ProductCard and components/Store/Products/Wrapper. Here the new component to show the products.
+- To show the products in app/store/[[...categories]]/page.tsx add the products and the return the ProductsWrapper ==>
+```
+import { ProductsWrapper } from "app/components/Store/ProductsWrapper"
 
-
-
+export default async function Category({
+        params,
+        searchParams
+}: CategoriesProps) {
+    const products = await getProducts()
+    return(
+        <ProductsWrapper products={products}/>
+    )
+}
+```
+- Now the navigation to /store in browser shows all products.
 
 
 
