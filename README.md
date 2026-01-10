@@ -340,12 +340,16 @@ console.log(error)
 }, []) 
 ```
 
-
-
-
-
-
-
+#### Global Error and 404
+- In /app new error.tsx file. Important!! shoud be a client component.
+- Here we will try to reset using GloablError({ reset }: ErrorPageProps)
+- To add interface ErrorPageProps new file in root types.d.ts
+- To test just add somewhere (I have in categories) ==>
+```
+ throw new Error('Error: POWER BOMB!!')
+```
+- When go to store will launch this error component.
+- The 404 not found is quite simple. Just in /app/not-found.tsx with function NotFound(). for better UX is good idea in this component add some links to "safes" links.
 
 
 

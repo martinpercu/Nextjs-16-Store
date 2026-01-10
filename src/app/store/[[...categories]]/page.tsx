@@ -18,6 +18,8 @@ export default async function Category({
     console.log(categories)
     console.log(search)
 
+    // throw new Error('Error: POWER BOMB!!')
+
     return(
         <div>
             <h1>Dynamic Catogory: {categories} </h1>
