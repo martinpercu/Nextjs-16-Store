@@ -54,5 +54,12 @@ export const getProducts = async (): Promise<ShopifyProduct[]> => {
   }
 
   // Clean up Shopify's structure to make it easier to use
-  return data.products.edges.map((edge) => edge.node);
+  return data.products.edges.map((edge) => {
+    const product = edge.node;
+    return {
+      ...product,
+      // Extraemos la URL de la primera imagen o devolvemos null
+      image: product.images.edges[0]?.node?.url || null 
+    };
+  });
 }
